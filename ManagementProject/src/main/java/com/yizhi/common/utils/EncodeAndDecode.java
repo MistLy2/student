@@ -1,5 +1,7 @@
 package com.yizhi.common.utils;
 
+//import com.sun.crypto.provider.SunJCE;
+
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -11,7 +13,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.sun.crypto.provider.SunJCE;
 
 public class EncodeAndDecode {
 	/*private static void ednCode(String plainText) {
@@ -83,7 +84,7 @@ public class EncodeAndDecode {
 
 		this.decryptCipher = null;
 
-		Security.addProvider(new SunJCE());
+		//Security.addProvider(new SunJCE());
 		Key key = getKey(strKey.getBytes());
 		try {
 			this.encryptCipher = Cipher.getInstance("DES");

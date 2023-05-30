@@ -98,7 +98,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
 
     /**
      * 获得byte[]型的key
-     * @param key
+     * @param
      * @return
      */
     private byte[] getByteKey(Serializable sessionId){

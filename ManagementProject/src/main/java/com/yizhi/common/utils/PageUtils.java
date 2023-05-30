@@ -21,18 +21,7 @@ public class PageUtils implements Serializable {
 	//状态码
 	private int code=0;
 
-	/**
-	 * 分页
-	 * 
-	 * @param list
-	 *            列表数据
-	 * @param totalCount
-	 *            总记录数
-	 * @param pageSize
-	 *            每页记录数
-	 * @param currPage
-	 *            当前页数
-	 */
+
 	public PageUtils(List<?> list, int total) {
 		this.rows = list;
 		this.total = total;

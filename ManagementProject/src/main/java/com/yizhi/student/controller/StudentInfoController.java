@@ -44,8 +44,9 @@ public class StudentInfoController {
 	@PostMapping("/save")
 	@RequiresPermissions("student:studentInfo:add")
 	public R save(StudentInfoDO studentInfoDO){
-	
-		return null;
+		//保存学生
+		int a = studentInfoService.save(studentInfoDO);
+		return a==1?R.ok("添加成功"):R.error();
 	}
 
 	/**
@@ -55,9 +56,10 @@ public class StudentInfoController {
 	@GetMapping("/list")
 	@RequiresPermissions("student:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-
-		return null;
-
+		//查询，需要分页
+		List<StudentInfoDO> dataList = studentInfoService.list(params);
+		int total = studentInfoService.count(params);
+		return new PageUtils(dataList,total);
 	}
 
 
@@ -69,8 +71,9 @@ public class StudentInfoController {
 	@PostMapping("/update")
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
-
-		return null;
+		//修改功能编写
+		int a = studentInfoService.update(studentInfo);
+		return a==1? R.ok("修改成功"):R.error();
 	}
 
 	/**
@@ -81,7 +84,9 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:remove")
 	public R remove( Integer id){
-		return null;
+		//根据id删除单个
+		studentInfoService.remove(id);
+		return R.ok("删除成功");
 	}
 	
 	/**
@@ -92,7 +97,8 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
-
+		//批量删除
+		studentInfoService.batchRemove(ids);
 		return null;
 	}
 

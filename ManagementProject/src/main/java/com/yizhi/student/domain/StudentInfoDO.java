@@ -72,6 +72,7 @@ public class StudentInfoDO implements Serializable {
 	//修改人
 	private Integer editUserid;
 
+
 	/**
 	 * 设置：主键
 	 */

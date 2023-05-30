@@ -17,7 +17,6 @@ import com.yizhi.miniapp.config.JwtConfig;
 import com.yizhi.miniapp.utils.JsonUtils;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,36 +39,36 @@ public class WeiXinJwtUtil {
 
     @Autowired
     private JwtConfig jwtConfig;
-
-    public Claims parseJWT(String jsonWebToken, String base64Security){
-        try{
-            Claims claims = Jwts.parser()
-                    .setSigningKey(DatatypeConverter.parseBase64Binary(base64Security))
-                    .parseClaimsJws(jsonWebToken).getBody();
-            return claims;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public String createJWT(WeixinUserPrincipal member, String base64Security)
-    {
-        //生成签名密钥
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(base64Security);
-        Key signingKey = new SecretKeySpec(apiKeySecretBytes, SIGNATURE_ALGORITHM.getJcaName());
-        //添加构成JWT的参数
-        JwtBuilder builder = Jwts.builder()
-                .setId(member.getUserid())
-                .setSubject(member.getUserid())
-                .signWith(SIGNATURE_ALGORITHM, signingKey)
-                .setExpiration(new Date(System.currentTimeMillis() + jwtConfig.getExpiration()))
-                .setNotBefore(new Date(System.currentTimeMillis()));
-        //生成JWT
-        return builder.compact();
-    }
+//
+//    public Claims parseJWT(String jsonWebToken, String base64Security){
+//        try{
+//            Claims claims = Jwts.parser()
+//                    .setSigningKey(DatatypeConverter.parseBase64Binary(base64Security))
+//                    .parseClaimsJws(jsonWebToken).getBody();
+//            return claims;
+//        }
+//        catch(Exception ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//        return null;
+//    }
+//
+//    public String createJWT(WeixinUserPrincipal member, String base64Security)
+//    {
+//        //生成签名密钥
+//        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(base64Security);
+//        Key signingKey = new SecretKeySpec(apiKeySecretBytes, SIGNATURE_ALGORITHM.getJcaName());
+//        //添加构成JWT的参数
+//        JwtBuilder builder = Jwts.builder()
+//                .setId(member.getUserid())
+//                .setSubject(member.getUserid())
+//                .signWith(SIGNATURE_ALGORITHM, signingKey)
+//                .setExpiration(new Date(System.currentTimeMillis() + jwtConfig.getExpiration()))
+//                .setNotBefore(new Date(System.currentTimeMillis()));
+//        //生成JWT
+//        return builder.compact();
+//    }
 
     public String getUserIdFromToken(String token) {
         String userId;
